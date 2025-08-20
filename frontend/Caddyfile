@@ -1,0 +1,24 @@
+{
+    # Global options
+    auto_https off
+}
+
+:5173 {
+    # Set this path to your site's directory.
+    root * /usr/share/caddy
+
+    # Enable the static file server.
+    file_server
+
+    # Another common task is to set up a reverse proxy.
+    # A reverse proxy forwards requests to another server.
+    # This is useful for when you have a backend API that you want to expose on the same domain.
+    # In our case, we don't need this for HTTP, but it's good to know.
+    # reverse_proxy /api/* {
+    #   to backend:8000
+    # }
+
+    # The `try_files` directive is used to rewrite requests to a specific file if the requested file is not found.
+    # This is useful for single-page applications like React, where you want all requests to be handled by index.html.
+    try_files {path} /index.html
+}
