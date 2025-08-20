@@ -19,7 +19,8 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 # --- Environment Variables & Constants ---
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_URL = os.getenv("REDIS_URL")  # Para Railway/Render
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost") # Para Docker Compose local
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ROUND_DURATION_SECONDS = 60
 CARD_COUNT = 20
@@ -64,7 +65,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-redis_client = redis.Redis(host=REDIS_HOST, port=6379, decode_responses=True)
+# Conexão com Redis: Prioriza a URL de conexão (para produção)
+if REDIS_URL:
+    logger.info("Connecting to Redis using REDIS_URL.")
+    redis_client = redis.from_url(REDIS_URL, decode_responses=True)
+else:
+    logger.info(f"Connecting to Redis using REDIS_HOST: {REDIS_HOST}")
+    redis_client = redis.Redis(host=REDIS_HOST, port=6379, decode_responses=True)
 openai_client = AsyncOpenAI(api_key=OPENAI_API_KEY)
 game_state = GameState()
 
