@@ -22,8 +22,24 @@ const useGameStore = create((set, get) => ({
   connect: () => {
     let player = get().player;
     if (!player) {
-      const adjectives = ["Rápido", "Astuto", "Corajoso", "Veloz", "Esperto", "Atento"];
-      const emojis = ["⚡️", "🦊", "🦁", "🦅", "🦉", "🕵️"];
+      const adjectives = [
+        "Ágil", "Brilhante", "Feroz", "Sagaz", "Ávido", "Intrépido", "Astuto",
+        "Vibrante", "Sutil", "Cauteloso", "Destemido", "Elegante", "Perspicaz",
+        "Silencioso", "Rápido", "Observador", "Atento", "Leal", "Valente",
+        "Imparável", "Intenso", "Sábio", "Inventivo", "Tenaz", "Criativo",
+        "Visionário", "Fortíssimo", "Prudente", "Seguro", "Explosivo", "Versátil",
+        "Resiliente", "Confiável", "Arrojado", "Notável", "Bravio", "Astro",
+        "Potente", "Destacado", "Formidável", "Habilidoso", "Ligeiro",
+        "Inabalável", "Fulgaz", "Radiante", "Supremo", "Audaz", "Héroico",
+        "Genial", "Áureo"
+      ];
+      const emojis = [
+        "⚡️","🔥","🌪️","🌊","🌟","☀️","🌙","⭐️","🌈","❄️",
+        "🦊","🦁","🐺","🐯","🦅","🦉","🕵️","🐉","🐍","🦂",
+        "🦖","🦕","🐦","🐧","🐬","🐳","🦈","🐎","🦓","🦌",
+        "🐒","🦍","🐼","🐨","🐯","🐲","🦩","🦜","🦢","🕊️",
+        "🦦","🐾","🎯","🛡️","⚔️","🏹","🚀","🎩","👑","💎"
+      ];
       const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
       const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
       
